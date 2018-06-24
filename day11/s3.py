@@ -149,7 +149,46 @@
 #
 # print('敬爱可亲的%s，最喜欢在 %s 地方干 %s ' % (name, place, thing))
 
+# def check_code():
+#     import random
+#     checkcode = ''
+#     for i in range(4):
+#         current = random.randrange(0, 4)
+#         if current != i:
+#             temp = chr(random.randint(65, 90))
+#         else:
+#             temp = random.randint(0, 9)
+#         checkcode += str(temp)
+#     return checkcode
+#
+# while True:
+#     code = check_code()
+#     print(code)
+#     auth_code = input('输入验证码：')
+#     if auth_code != code:
+#         print('验证码错误！')
+#         continue
+#     else:
+#         print('验证成功。')
+#         break
 
+# str1 = input('>>>')
+# if '苍老师' in str1 or '东京热' in str1:
+#     str2 = str1.replace('东京热', '***').replace('苍老师', '***')
+#     print(str2)
+# else:
+#     print(str1)
+
+while True:
+    username = input('username:')
+    pwd = input('pwd:')
+    email = input('email:')
+    str1 = username + '\t' + pwd + '\t' + email + '\n'
+    cmd = input('>>>')
+    if cmd == 'Q' or cmd == 'q':
+        v = str1.expandtabs(20)
+        print(v)
+        break
 
 
 
