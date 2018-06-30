@@ -32,9 +32,17 @@
 # r = reduce(lambda x, y: x + y, [1,2,3,4])
 # print(r)
 
-s = str({'a':1, 'b':2})
-m = eval(s)
-print(type(m))
+# s = str({'a':1, 'b':2})
+# m = eval(s)
+# print(type(m))
+
+# z = zip('hello', 'world')
+# print(list(z))
+
+# d1 = {'xiaofei':19, 'hkey': 20, 'xiaoA': 18}
+
+# print(sorted(zip(d1.values(), d1.keys())))
+# print(list(zip(d1.values(), d1.keys())))
 
 
 
