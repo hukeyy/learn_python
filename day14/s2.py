@@ -19,16 +19,16 @@
 # print(a)
 # print(b)
 
-list1 = [1, 2, 3, 4, [5, 6]]
-
-list2 = list1.copy()
-print(id(list1))
-print(id(list2))
-
-list2.pop(0)
-print(list1)
-print(list2)
-
-list2[-1][-1] = 88888
-print(list1)
-print(list2)
+# list1 = [1, 2, 3, 4, [5, 6]]
+#
+# list2 = list1.copy()
+# print(id(list1))
+# print(id(list2))
+#
+# list2.pop(0)
+# print(list1)
+# print(list2)
+#
+# list2[-1][-1] = 88888
+# print(list1)
+# print(list2)
