@@ -73,24 +73,33 @@
 #         func()
 #     return wrapper
 
-import time
+# import time
+#
+#
+# def timmer(func):
+#     def wrapper(*args, **kwargs):
+#         start_time = time.time()
+#         res = func(*args, **kwargs)
+#         print('程序运行时间是:', time.time() - start_time)
+#         return res
+#     return wrapper
+#
+#
+# @timmer
+# def test():
+#     time.sleep(2)
+#     print('test函数执行完毕。')
+#     return '这是test函数返回值'
+#
+#
+# res = test()
+# print(res)
 
-
-def timmer(func):
-    def wrapper(*args, **kwargs):
-        start_time = time.time()
-        res = func(*args, **kwargs)
-        print('程序运行时间是:', time.time() - start_time)
-        return res
-    return wrapper
-
-
-@timmer
-def test():
-    time.sleep(2)
-    print('test函数执行完毕。')
-    return '这是test函数返回值'
-
-
-res = test()
-print(res)
+# def foo():
+#     print('from test.')
+#
+# def timmer(func):
+#     return func
+#
+# res = timmer(foo)
+# print(res)
