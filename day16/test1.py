@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
 # Author: hkey
-with open('haproxy.cfg', 'r') as file:
-    for line in file:
-        print(line.strip())
+
+# l1 = ['a', 'b', 'c', 'd']
+# l1.remove('b')
+# print(l1)
+
+str1 = input('>>>') + '\n'
+
+print(str1)
+print('abc')
