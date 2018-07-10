@@ -3,6 +3,7 @@
 import os
 
 def file_handle(backend_data, src=None, type='fetch'):
+    '''解耦函数'''
     if type == 'fetch':
         with open('haproxy.cfg', 'r') as read_f:
             ret = []
@@ -41,10 +42,12 @@ def file_handle(backend_data, src=None, type='fetch'):
 
 
 def fetch(find_str):
+    '''查询功能'''
     backend_str = 'backend %s' % find_str
     return file_handle(backend_str)
 
 def add(backend):
+    '''新增功能'''
     print('这是新增功能.')
     backend_list = fetch(backend)
     if not backend_list:
@@ -56,6 +59,7 @@ def add(backend):
 
 
 def change(modify_data):
+    '''修改功能'''
     print('这是修改功能.')
     modify_data = eval(modify_data)
     backend = modify_data[0]['backend']
@@ -75,6 +79,7 @@ def change(modify_data):
         return file_handle(backend_data, src=backend_list, type='change')
 
 def delete(backend):
+    '''删除功能'''
     print('这是删除功能.')
     backend_list = fetch(backend)
     if not backend_list:
