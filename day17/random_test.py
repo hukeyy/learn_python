@@ -18,7 +18,7 @@ import random
 def v_code():
     '''随机验证码'''
     ret = ''
-    for i in range(9):
+    for i in range(5):
         ran_int = random.randint(0, 9)
         ran_str1 = chr(random.randint(65, 122))
         # ran_str2 = chr(random.randint(97, 122))
