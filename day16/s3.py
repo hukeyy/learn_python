@@ -9,7 +9,6 @@ def file_handle(backend_data, src=None, type='fetch'):
             Flag = False
             for line in file:
                 if line.strip() == backend_data:
-                    # print(line)
                     Flag = True
                     continue
                 if Flag == True and line.startswith('backend'):
