@@ -2,8 +2,9 @@
 # Author: hkey
 import os
 
+
 def file_handle(backend_data, src=None, type='fetch'):
-    if type=='fetch':
+    if type == 'fetch':
         with open('haproxy.cfg', 'r') as file:
             find_list = []
             Flag = False
@@ -17,7 +18,7 @@ def file_handle(backend_data, src=None, type='fetch'):
                     print('\33[42;1m%s\33[0m' % line, end='')
                     find_list.append(line)
         return find_list
-    elif type=='change':
+    elif type == 'change':
         with open('haproxy.cfg', 'r') as read_f, open('haproxy.conf', 'w') as write_f:
             Flag = False
             has_write = False
@@ -39,21 +40,25 @@ def file_handle(backend_data, src=None, type='fetch'):
         os.rename('haproxy.conf', 'haproxy.cfg')
         os.remove('haproxy.cnf_bak')
 
+
 def fetch(data):
     print('\33[43;1m这是查询功能。\33[0m')
     backend_str = 'backend %s' % data
     return file_handle(backend_str, type='fetch')
+
+
 def add():
     pass
 
+
 def change(modify_data):
     print('\33[43;1m这是修改功能.\33[0m')
-    backend = modify_data[0]['backend'] # 主机名
-    backend_data = 'backend %s' % backend # backend 主机名
+    backend = modify_data[0]['backend']  # 主机名
+    backend_data = 'backend %s' % backend  # backend 主机名
     #    {'server': '10.0.10.1', 'weight': 20, 'maxconn': 21}
-    old_super = '%sserver %s weight %s maxconn %s\n' % ( ' ' *4,  modify_data[0]['record']['server'],
-                                            modify_data[0]['record']['weight'],
-                                                       modify_data[0]['record']['maxconn'])
+    old_super = '%sserver %s weight %s maxconn %s\n' % (' ' * 4, modify_data[0]['record']['server'],
+                                                        modify_data[0]['record']['weight'],
+                                                        modify_data[0]['record']['maxconn'])
 
     new_super = '%sserver %s weight %s maxconn %s\n' % (' ' * 4, modify_data[1]['record']['server'],
                                                         modify_data[1]['record']['weight'],
@@ -68,9 +73,9 @@ def change(modify_data):
 
     return file_handle(backend_data, src=src_data, type='change')
 
+
 def delete():
     pass
-
 
 
 if __name__ == '__main__':
@@ -99,6 +104,3 @@ if __name__ == '__main__':
             find_str = eval(find_str)
         res = msg_dict[choice](find_str)
         print(res)
-
-
-
