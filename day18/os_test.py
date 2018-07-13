@@ -38,7 +38,7 @@ def v_code():
         ran_code += s   # 叠加字符串
     return ran_code
 
-v = v_code()
-print(v)
+print(v_code())
+
 
 
