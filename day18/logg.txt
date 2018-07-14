@@ -1,0 +1,5 @@
+2018-07-14 08:51:48,536 logging_test.py debug message
+2018-07-14 08:51:48,536 logging_test.py info message
+2018-07-14 08:51:48,536 logging_test.py warning message
+2018-07-14 08:51:48,536 logging_test.py error message
+2018-07-14 08:51:48,536 logging_test.py critical message

@@ -1,0 +1,98 @@
+2018-07-14 09:08:54,983 - WARNING - logger warning message
+2018-07-14 09:08:54,983 - ERROR - logger error message
+2018-07-14 09:08:54,983 - CRITICAL - logger critical message
+2018-07-14 09:23:40,265 - DEBUG - logger debug message
+2018-07-14 09:23:40,265 - INFO - logger info message
+2018-07-14 09:23:40,265 - WARNING - logger warning message
+2018-07-14 09:23:40,266 - ERROR - logger error message
+2018-07-14 09:23:40,266 - CRITICAL - logger critical message
+2018-07-14 09:23:40,266 - DEBUG - logger debug message
+2018-07-14 09:23:40,266 - INFO - logger info message
+2018-07-14 09:23:40,266 - WARNING - logger warning message
+2018-07-14 09:23:40,266 - ERROR - logger error message
+2018-07-14 09:23:40,266 - CRITICAL - logger critical message
+2018-07-14 09:24:39,992 - mylogger - DEBUG - logger debug message
+2018-07-14 09:24:39,992 - mylogger - INFO - logger info message
+2018-07-14 09:24:39,992 - mylogger - WARNING - logger warning message
+2018-07-14 09:24:39,992 - mylogger - ERROR - logger error message
+2018-07-14 09:24:39,993 - mylogger - CRITICAL - logger critical message
+2018-07-14 09:24:39,993 - mylogger - DEBUG - logger debug message
+2018-07-14 09:24:39,993 - mylogger - INFO - logger info message
+2018-07-14 09:24:39,993 - mylogger - WARNING - logger warning message
+2018-07-14 09:24:39,993 - mylogger - ERROR - logger error message
+2018-07-14 09:24:39,993 - mylogger - CRITICAL - logger critical message
+2018-07-14 09:25:00,251 - mylogger - DEBUG - logger1 debug message
+2018-07-14 09:25:00,252 - mylogger - INFO - logger1 info message
+2018-07-14 09:25:00,252 - mylogger - WARNING - logger1 warning message
+2018-07-14 09:25:00,252 - mylogger - ERROR - logger1 error message
+2018-07-14 09:25:00,252 - mylogger - CRITICAL - logger1 critical message
+2018-07-14 09:25:00,252 - mylogger - DEBUG - logger2 debug message
+2018-07-14 09:25:00,252 - mylogger - INFO - logger2 info message
+2018-07-14 09:25:00,252 - mylogger - WARNING - logger2 warning message
+2018-07-14 09:25:00,252 - mylogger - ERROR - logger2 error message
+2018-07-14 09:25:00,252 - mylogger - CRITICAL - logger2 critical message
+2018-07-14 09:25:08,709 - mylogger1 - DEBUG - logger1 debug message
+2018-07-14 09:25:08,709 - mylogger1 - INFO - logger1 info message
+2018-07-14 09:25:08,709 - mylogger1 - WARNING - logger1 warning message
+2018-07-14 09:25:08,709 - mylogger1 - ERROR - logger1 error message
+2018-07-14 09:25:08,709 - mylogger1 - CRITICAL - logger1 critical message
+2018-07-14 09:25:08,709 - mylogger2 - DEBUG - logger2 debug message
+2018-07-14 09:25:08,709 - mylogger2 - INFO - logger2 info message
+2018-07-14 09:25:08,710 - mylogger2 - WARNING - logger2 warning message
+2018-07-14 09:25:08,710 - mylogger2 - ERROR - logger2 error message
+2018-07-14 09:25:08,710 - mylogger2 - CRITICAL - logger2 critical message
+2018-07-14 09:25:56,115 - root - DEBUG - logger2 debug message
+2018-07-14 09:25:56,115 - root - INFO - logger2 info message
+2018-07-14 09:25:56,115 - root - WARNING - logger2 warning message
+2018-07-14 09:25:56,115 - root - ERROR - logger2 error message
+2018-07-14 09:25:56,115 - root - CRITICAL - logger2 critical message
+2018-07-14 09:25:56,115 - mylogger1 - DEBUG - logger1 debug message
+2018-07-14 09:25:56,115 - mylogger1 - DEBUG - logger1 debug message
+2018-07-14 09:25:56,115 - mylogger1 - INFO - logger1 info message
+2018-07-14 09:25:56,115 - mylogger1 - INFO - logger1 info message
+2018-07-14 09:25:56,115 - mylogger1 - WARNING - logger1 warning message
+2018-07-14 09:25:56,115 - mylogger1 - WARNING - logger1 warning message
+2018-07-14 09:25:56,115 - mylogger1 - ERROR - logger1 error message
+2018-07-14 09:25:56,115 - mylogger1 - ERROR - logger1 error message
+2018-07-14 09:25:56,115 - mylogger1 - CRITICAL - logger1 critical message
+2018-07-14 09:25:56,115 - mylogger1 - CRITICAL - logger1 critical message
+2018-07-14 09:26:16,866 - root - DEBUG - logger2 debug message
+2018-07-14 09:26:16,867 - root - INFO - logger2 info message
+2018-07-14 09:26:16,867 - root - WARNING - logger2 warning message
+2018-07-14 09:26:16,867 - root - ERROR - logger2 error message
+2018-07-14 09:26:16,867 - root - CRITICAL - logger2 critical message
+2018-07-14 09:26:16,867 - mylogger1 - INFO - logger1 info message
+2018-07-14 09:26:16,867 - mylogger1 - INFO - logger1 info message
+2018-07-14 09:26:16,867 - mylogger1 - WARNING - logger1 warning message
+2018-07-14 09:26:16,867 - mylogger1 - WARNING - logger1 warning message
+2018-07-14 09:26:16,867 - mylogger1 - ERROR - logger1 error message
+2018-07-14 09:26:16,867 - mylogger1 - ERROR - logger1 error message
+2018-07-14 09:26:16,868 - mylogger1 - CRITICAL - logger1 critical message
+2018-07-14 09:26:16,868 - mylogger1 - CRITICAL - logger1 critical message
+2018-07-14 09:30:39,054 - root - WARNING - logger warning message
+2018-07-14 09:30:39,054 - root - ERROR - logger error message
+2018-07-14 09:30:39,054 - root - CRITICAL - logger critical message
+2018-07-14 09:30:39,054 - mylogger - INFO - logger1 info message
+2018-07-14 09:30:39,054 - mylogger - INFO - logger1 info message
+2018-07-14 09:30:39,055 - mylogger - WARNING - logger1 warning message
+2018-07-14 09:30:39,055 - mylogger - WARNING - logger1 warning message
+2018-07-14 09:30:39,055 - mylogger - ERROR - logger1 error message
+2018-07-14 09:30:39,055 - mylogger - ERROR - logger1 error message
+2018-07-14 09:30:39,055 - mylogger - CRITICAL - logger1 critical message
+2018-07-14 09:30:39,055 - mylogger - CRITICAL - logger1 critical message
+2018-07-14 09:30:39,055 - mylogger - INFO - logger2 info message
+2018-07-14 09:30:39,055 - mylogger - INFO - logger2 info message
+2018-07-14 09:30:39,055 - mylogger - WARNING - logger2 warning message
+2018-07-14 09:30:39,055 - mylogger - WARNING - logger2 warning message
+2018-07-14 09:30:39,055 - mylogger - ERROR - logger2 error message
+2018-07-14 09:30:39,055 - mylogger - ERROR - logger2 error message
+2018-07-14 09:30:39,055 - mylogger - CRITICAL - logger2 critical message
+2018-07-14 09:30:39,055 - mylogger - CRITICAL - logger2 critical message
+2018-07-14 09:41:03,604 - mylogger - INFO - logger1 info message
+2018-07-14 09:41:03,604 - mylogger - WARNING - logger1 warning message
+2018-07-14 09:41:03,604 - mylogger - ERROR - logger1 error message
+2018-07-14 09:41:03,604 - mylogger - CRITICAL - logger1 critical message
+2018-07-14 09:41:03,604 - mylogger - INFO - logger2 info message
+2018-07-14 09:41:03,604 - mylogger - WARNING - logger2 warning message
+2018-07-14 09:41:03,604 - mylogger - ERROR - logger2 error message
+2018-07-14 09:41:03,604 - mylogger - CRITICAL - logger2 critical message
