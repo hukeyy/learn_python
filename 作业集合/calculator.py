@@ -124,14 +124,12 @@ def mul_div(exp):
 def add_sub(exp):
     # print('add_sub:', exp)
     match = re.search('\d+\.?\d*[\+\-]+\d+\.?\d*', exp)  # 从前往后匹配第一个 '+ -'的表达式
-    print(match)
     if match:
         content = match.group()  # 获取匹配到的表达式
         if len(content.split('+')) > 1:
             n1, n2 = content.split('+')
             value = float(n1) + float(n2)  # 计算加法
             exp = exp.replace(content, str(value))  # 计算后的值替换表达式
-            print('exp', exp)
             exp = simple_exp(exp)  # 检查表达式是否存在'+-'等字符
             return add_sub(exp)  # 递归计算
         elif len(content.split('-')) > 1:
@@ -181,7 +179,7 @@ def parenthesis(exp):
         print('括号中的计算结果：\33[32;1m%s=%s\33[0m' % (content, result))
         replace_content = '(' + content + ')'
         # 替换括号中的内容，将表达式中的括号替换成计算结果
-        exp.replace(replace_content, str(result))
+        exp = exp.replace(replace_content, str(result))
         # 检查替换括号后，是否存在类似'+-'等字符，如果存在，先检查替换
         exp = simple_exp(exp)
         print('计算后的表达式：\33[32;1m%s\33[0m' % exp)
@@ -191,7 +189,6 @@ def parenthesis(exp):
     else:
         # 当表达式没有括号时，直接计算出结果
         result = calculate(exp)
-        print('result', result)
         print('表达式运算结果：\33[32;1m%s\33[0m' % result)
 
 
@@ -207,7 +204,6 @@ if __name__ == '__main__':
         if check_exp(cal_str):
             # exp = 简化用户输入后的表达式
             exp = simple_exp(cal_str)
-            print('------------', exp)
-            print('\33[32;1m简化后的表达式：%s\33[0m' % exp)
+            print('简化后的表达式：\33[32;1m%s\33[0m' % exp)
             parenthesis(exp)
 

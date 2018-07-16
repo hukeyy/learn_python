@@ -22,9 +22,11 @@
 # str1 = '1-2*((60-30+(-40/5)*(9-2*5/3+7/3*99/4*2998+10*568/14))-(-4*3)/(16-3*2))'
 # str2 = re.search('\([^()]+\)', str1)
 
-import re
-# str1 = '123.1-123.12'
-# print(str1.split('-'))
-exp = '1+(1-2)'
-match = re.search('\d+\.?\d*[\+\-]+\d+\.?\d*', exp)
-print(match)
+# import re
+# # str1 = '123.1-123.12'
+# # print(str1.split('-'))
+# exp = '3.0'
+# match = re.search('\d+\.?\d*[\+\-]+\d+\.?\d*', exp)
+# print(match)
+
+print(eval('3*( 4+ 50 )-(( 100 + 40 )*5/2- 3*2* 2/4+9)*((( 3 + 4)-4)-4)'))
