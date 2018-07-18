@@ -25,7 +25,7 @@ def check_exp(get_input):
             return False
         # 如果表达式中含有 '.., +/, +/, -*, -/, -%'，则为假
         elif '..' in get_input or '+*' in get_input or '+/' in get_input or '+%' in get_input \
-                or '-*' in get_input or '-/' in get_input or '-%' in get_input:
+                or '-*' in get_input or '-/' in get_input or '-%' in get_input or '%%' in get_input:
             print('\33[31;1m输入的表达式有误，请重新输入\33[0m')
             return False
         else:
@@ -36,6 +36,11 @@ def check_exp(get_input):
 
 
 def simple_exp(exp):
+    '''
+    简化表达式，如'+-' 简化为 '-'，返回最简表达式
+    :param exp: 用户输入的表达式
+    :return: 简化后的表达式
+    '''
     # 初始化一个替换字符列表
     replace_char_list = [('+-', '-'), ('-+', '-'), ('++', '+'), ('--', '+'), ('*+', '*'),
                          ('/+', '/'), ('%+', '%'), ('//+', '//'), ('**+', '**')]
@@ -45,28 +50,106 @@ def simple_exp(exp):
         for i in replace_char_list:
             if i[0] in exp:  # 要简化的字符在表达式中
                 exp = exp.replace(i[0], i[1])  # 替换需要简化的字符
-                break  # 中断for循环，进行下一次while循环，
+                break  # 中断for循环，进行下一次while循环，避免出现 '1+++3'这样情况
             else:
                 count += 1
+            # 如果replace_char_list 等于 count，说明没有需要替换的字符，退出循环
             if len(replace_char_list) == count:
                 flag = True
-
+        # 如果表达式以'+'开头，就去掉'+'
         if exp.startswith('+'):
             exp = exp[1:]
     return exp
 
+
 def power(exp):
-    match = re.search('[\+\-]*\d*\.?\d*[\*]{2}[\+\-]*\d*\.?\d*', exp)
+    '''
+    表达式的幂运算，并将计算结果替换为匹配到的表达式
+    :param exp: 去除括号后的表达式
+    :return: 返回计算后的表达式
+    '''
+    match = re.search('[\+\-]*\d*\.?\d*[\*]{2}[\+\-]*\d*\.?\d*', exp)  # 匹配幂运算
+    # 如果匹配到就进行幂运算，否则直接返回表达式
     if match:
-        pass
+        match_content = match.group()
+        if match_content.split('**') > 1:
+            n1, n2 = match_content.split('**')
+            result = float(n1) ** float(n2)  # 幂运算
+            exp = exp.replace(match_content, str(result))  # 用计算后的值替换匹配的表达式
+            exp = simple_exp(exp)  # 检查替换后的表达式是否存在'+-'等字符，有的话替换为最简
+            return power(exp)  # 递归执行匹配计算
     else:
         return exp
 
+
 def mul_div(exp):
-    pass
+    '''
+    表达式的乘除、取整、取余计算，并将计算结果替换为匹配到的表达式
+    :param exp: 去除括号后的表达式
+    :return: 返回计算后的表达式
+    '''
+    match = re.search('\d+\.?\d*[\*\/\/\/\%]+[\-]?\d+\.?\d*', exp)  # 匹配 '乘除、取余、取整'表达式
+    if match:
+        match_content = match.group()
+        if len(match_content.split('*')) > 1:
+            n1, n2 = match_content.split('*')
+            result = float(n1) * float(n2)  # 乘法计算
+            exp = exp.replace(match_content, str(result))  # 用计算后的值替换匹配的表达式
+            exp = simple_exp(exp)  # 检查替换后的表达式是否存在'+-'等字符，有的话替换为最简
+            return mul_div(exp)  # 递归执行匹配计算
+        elif len(match_content.split('/')) > 1:
+            n1, n2 = match_content.split('/')
+            result = float(n1) / float(n2)  # 除法计算
+            exp = exp.replace(match_content, str(result))  # 用计算后的值替换匹配的表达式
+            exp = simple_exp(exp)  # 检查替换后的表达式是否存在'+-'等字符，有的话替换为最简
+            return mul_div(exp)  # 递归执行匹配计算
+        elif len(match_content.split('//')) > 1:
+            n1, n2 = match_content.split('//')
+            result = float(n1) // float(n2)  # 取整计算
+            exp = exp.replace(match_content, str(result))  # 用计算后的值替换匹配的表达式
+            exp = simple_exp(exp)  # 检查替换后的表达式是否存在'+-'等字符，有的话替换为最简
+            return mul_div(exp)  # 递归执行匹配计算
+        elif len(match_content.split('%')) > 1:
+            n1, n2 = match_content.split('%')
+            result = float(n1) % float(n2)  # 取余计算
+            exp = exp.replace(match_content, str(result))  # 用计算后的值替换匹配的表达式
+            exp = simple_exp(exp)  # 检查替换后的表达式是否存在'+-'等字符，有的话替换为最简
+            return mul_div(exp)  # 递归执行匹配计算
+    else:
+        return exp
+
 
 def add_sub(exp):
-    pass
+    '''
+    表达式的加减计算，并将计算结果替换为匹配到的表达式
+    :param exp: 去除括号后的表达式
+    :return: 返回计算后的表达式
+    '''
+    match = re.search('\-?\d+\.?\d*(\+|\-)\d+\.?\d*', exp)  # 匹配加减表达式
+    if match:
+        match_content = match.group()
+        if len(match_content.split('+')) > 1:
+            n1, n2 = match_content.split('+')
+            result = float(n1) + float(n2)  # 计算加法
+            exp = exp.replace(match_content, str(result))  # 将计算的值替换括号表达式
+            exp = simple_exp(exp)  # 检查替换括号后的表达式是否存在 '++'等字符，存在的话先替换掉
+            return add_sub(exp)  # 递归计算括号中的内容并替换
+        # 如果表达式以'-' 分隔，分为两种情况 1. '-1-1'.split('-') 等于三个元素, 2. '1-1'.split('-') 等于两个元素
+        elif len(match_content.split('-')) > 1:
+            if match_content.split('-') == 3:
+                n1, n2 = match_content.split('-')[1:]
+                result = float('-' + n1) - float(n2)  # 这里要注意 float('-' + n1)
+                exp = exp.replace(match_content, str(result))  # 将计算的值替换括号表达式
+                exp = simple_exp(exp)  # 检查替换括号后的表达式是否存在 '++'等字符，存在的话先替换掉
+                return add_sub(exp)  # 递归计算括号中的内容并替换
+            elif len(match_content.split('-')) == 2:
+                n1, n2 = match_content.split('-')
+                result = float(n1) - float(n2)  # 计算减法
+                exp = exp.replace(match_content, str(result))  # 将计算的值替换括号表达式
+                exp = simple_exp(exp)  # 检查替换括号后的表达式是否存在 '++'等字符，存在的话先替换掉
+                return add_sub(exp)  # 递归计算括号中的内容并替换
+    else:
+        return exp
 
 
 def calculate(exp):
@@ -75,10 +158,11 @@ def calculate(exp):
     :param exp: 表达式
     :return: 运算结果
     '''
-    result = power(exp)
-    result = mul_div(result)
-    result = add_sub(result)
+    result = power(exp)  # 执行幂运算，返回计算结果
+    result = mul_div(result)  # 执行乘除、取整、取余运算，返回结算结果
+    result = add_sub(result)  # 执行加减运算，返回计算结果
     return result
+
 
 def parenthesis(exp):
     '''
@@ -115,6 +199,3 @@ if __name__ == '__main__':
             exp = simple_exp(get_input)
             print('简化后的表达式:\33[32;1m%s\33[0m' % exp)
             parenthesis(exp)
-
-        else:
-            pass
