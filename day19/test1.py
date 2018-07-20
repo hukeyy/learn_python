@@ -25,19 +25,15 @@ menu = {
     }
 }
 
-
 def threeTL(dic):
     while True:
         for key in dic:
             print(key)
         choice = input('>>>').strip()
-        if choice == 'b' or choice == 'q':
-            return choice
+        if choice == 'b' or choice == 'q': return choice
         elif choice in dic and dic[choice]:
             res = threeTL(dic[choice])
-            if res == 'q': return res
-        elif not choice or choice not in dic:
+        elif choice not in dic or dic[choice]:
             continue
-
 
 threeTL(menu)
