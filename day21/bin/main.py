@@ -25,6 +25,13 @@ class School(object):
         dict[self][course] = {'teacher': teacher}
         file_oper(file, 'wb', dict)
 
+    def create_grade(self, dict, teacher_dict, course, grade, teacher, file1, file2):
+        # 数据库添加班级信息
+        dict[self][course]['grade'] = grade
+        file_oper(file1, 'wb', dict)
+        teacher_dict[teacher] = {'grade': grade}
+        file_oper(file2, 'wb', teacher_dict)
+
 
 class Course(object):
     def __init__(self, name, price, time):
@@ -53,6 +60,19 @@ class Teacher(People):
         print('课程：【%s】\t讲师：【%s】' % (self.course, self.name))
 
 
+class Grade():
+    # 创建班级
+    def __init__(self, name, course, teacher):
+        student = set([])
+        self.name = name
+        self.course = course
+        self.teacher = teacher
+
+    def cat_grade(self):
+        # 查看班级信息
+        print('\033[32;1m班级：【%s】\t课程：【%s】\t讲师：【%s】' % (self.name, self.course, self.teacher))
+
+
 def file_oper(file, mode, *args):
     if mode == 'wb':
         with open(file, mode) as f:
@@ -78,8 +98,11 @@ def information(dict_data, mode, *args):
                 key.cat_course()
             elif mode == 'teacher' and key == 'teacher':
                 dict_data[key].cat_teacher()
-                print('dict_data[key].name:', dict_data[key].name)
                 set_info.add(dict_data[key].name)
+            elif mode == 'grade' and key == 'grade':
+                dict_data[key].cat_grade()
+                set_info.add(dict_data[key].name)
+
             if type(key) != str:
                 dict_info[key.name] = key
     return dict_info, set_info
@@ -108,7 +131,42 @@ def school_center():
                 # ["创建班级", "招聘讲师", "创建课程", "返回"]
                 if choice == '1':
                     print('\033[42;1m【创建班级】\033[0m')
+                    while True:
+                        print('\033[32;1m学校【%s】目前已经有的班级信息\033[0m'.center(40, '#') % school.name)
+                        teacher_dict = file_oper(__db_teacher, 'rb')
+                        res_course = information(dict_main[school], 'None')[0]
+                        set_info = set([])
+                        if res_course:
+                            for i in res_course:
+                                k = res_course[i]
+                                res_grade = information(dict_main[school][k], 'grade', set_info)[1]
+
+                        if_cont = input('\033[34;1m是否要创建班级【y】创建【b】退出\033[0m').strip()
+                        if if_cont == 'y':
+                            grade_name = input('\033[34;1m输入要创建班级的名称：\033[0m:').strip()
+                            course_name = input('\033[34;1m输入要班级上的课程：\033[0m:').strip()
+                            if course_name in res_course:
+                                course = res_course[course_name]
+                                if dict_main[school][course]:
+                                    teacher = dict_main[school][course]['teacher']
+                                    if grade_name not in res_grade:
+                                        grade = Grade(grade_name, course_name, teacher.name)
+                                        school.create_grade(dict_main, teacher_dict, course, grade, teacher, __db_main,
+                                                            __db_teacher)
+
+                                    else:
+                                        print('\033[31;1m错误：当前班级已经存在\033[0m')
+                                else:
+                                    print('\033[31;1m错误：当前课程还没有讲师\033[0m')
+
+                            else:
+                                print('\033[31;1m错误：课程【%s】不存在，请先创建课程\033[0m' % course_name)
+
+                        elif if_cont == 'b':
+                            break
+
                 elif choice == '2':
+
                     print('\033[42;1m【招聘讲师】\033[0m')
                     while True:
                         print('\033[32;1m学校【%s】目前已经有的课程与讲师\033[0m'.center(40, '#') % school_name)
@@ -121,6 +179,7 @@ def school_center():
                                 # print('k', k)
                                 # {class-school:{class-course:{class-teacher}}}
                                 res_teacher = information(dict_main[school][k], 'teacher', set_info)[1]
+                                # BUG: 多门课程，如果其中一门招聘了讲师，后面没有讲师的课程不会再显示出来
                                 if not res_teacher:
                                     print('课程：【%s】\t讲师为【None】' % i)
 
@@ -144,9 +203,6 @@ def school_center():
 
                         elif if_cont == 'b':
                             break
-
-
-
 
 
 
