@@ -7,10 +7,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 __db_main = os.path.join(BASE_DIR, 'database', 'main_dict')
 __db_teacher = os.path.join(BASE_DIR, 'database', 'teacher_dict')
 
+
 class School(object):
     def __init__(self, name, addr):
         self.name = name
         self.addr = addr
+
     def cat_school(self):
         print('\033[32;1m学校：【%s】\t地址：【%s】\033[0m' % (self.name, self.addr))
 
@@ -44,6 +46,7 @@ class People(object):
         self.name = name
         self.age = age
 
+
 class Teacher(People):
     def __init__(self, name, age, school, course, role='讲师'):
         super(Teacher, self).__init__(name, age)
@@ -62,9 +65,15 @@ class Grade(object):
         self.school = school
         self.course = course
         self.teacher = teacher
+        self.student = student
 
     def cat_grade(self):
         print('\033[32;1m班级：【%s】\t课程：【%s】\t讲师：【%s】\033[0m' % (self.name, self.teacher, self.course))
+
+    def add_student(self, student_name, dict, teacher, file):
+        self.student.add(student_name)
+        dict[teacher] = {'teacher': self}
+        file_oper(file, 'wb', dict)
 
 
 def file_oper(file, mode, *args):
@@ -76,6 +85,7 @@ def file_oper(file, mode, *args):
         with open(file, mode) as f:
             data = pickle.load(f)
             return data
+
 
 def information(res_main, mode, *args):
     if args:
@@ -103,10 +113,56 @@ def information(res_main, mode, *args):
 
 
 def student_center():
-    print('\033[42;1m【学生中心】\033[0m')
+    print('\033[42;1m【欢迎进入学员中心】\033[0m')
+    while True:
+        choice = options(list_student)
+        # ["学员注册", "返回"]
+        if choice == '1':
+            print('\033[42;1m【学员注册】\033[0m')
+            student_name = input('\033[34;1m输入学生名：\033[0m').strip()
+            res_main = file_oper(__db_main, 'rb')
+            res_teacher = file_oper(__db_teacher, 'rb')
+            school_dict = information(res_main, 'main')[0]
+            school_name = input('\033[34;1m输入学校名：\033[0m')
+            if school_name in school_dict:
+                school = school_dict[school_name]
+                if res_main[school]:
+                    course_dict = information(res_main[school], 'course')[0]
+                    course_name = input('\033[34;1m输入课程名：\033[0m').strip()
+                    if course_name in course_dict:
+                        course = course_dict[course_name]
+                        if res_main[school][course].get('grade'):
+                            for i in res_teacher:
+                                if i.course == course.name:
+                                    teacher = i
+                                    grade = res_teacher[teacher]['grade']
+                            print('\033[32;1m课程：【%s】的费用为【%s】' % (course.name, course.price))
+                            if_pay = input('\033[34;1m是否支付当前费用 支付【y】\033[0m:').strip()
+                            if if_pay == 'y':
+                                # (self, student_name, dict, teacher, file)
+                                grade.add_student(student_name, res_teacher, teacher, __db_teacher)
+                                print('\033[32;1m选课成功.\033[0m')
+                                any = input('\033[34;1m按任意键退出\033[0m').strip()
+
+
+                    else:
+                        print('\033[31;1m错误：课程信息有误.\033[0m')
+
+            else:
+                print('\033[31;1m错误：学校信息有误.\033[0m')
+
+        elif choice == '2':
+            break
+        else:
+            print('\033[31;1m错误：序号错误.\033[0m')
+
+
+
 
 def teacher_center():
     print('\033[42;1m【教师中心】\033[0m')
+
+
 
 
 
@@ -128,7 +184,7 @@ def school_center():
                 if choice == '1':
                     print('\033[42;1m【创建班级】\033[0m')
                     while True:
-                        print('\033[32;1m学校【%s】目前已有班级\033[0m'.center(50,'#') % school_name)
+                        print('\033[32;1m学校【%s】目前已有班级\033[0m'.center(50, '#') % school_name)
                         course_dict = information(res_main[school], 'None')[0]
                         set_info = set([])
                         for i in course_dict:
@@ -152,13 +208,10 @@ def school_center():
                         elif if_cont == 'b':
                             break
 
-
-
-
                 elif choice == '2':
                     print('\033[42;1m【招聘讲师】\033[0m')
                     while True:
-                        print('\033[32;1m学校【%s】目前已有课程及讲师\033[0m'.center(50,'#') % school_name)
+                        print('\033[32;1m学校【%s】目前已有课程及讲师\033[0m'.center(50, '#') % school_name)
                         course_dict = information(res_main[school], 'None')[0]
                         set_info = set([])
                         for i in course_dict:
@@ -190,7 +243,7 @@ def school_center():
                 elif choice == '3':
                     print('\033[42;1m【创建课程】\033[0m')
                     while True:
-                        print('\033[32;1m学校【%s】目前已有课程\033[0m'.center(50,'#') % school_name)
+                        print('\033[32;1m学校【%s】目前已有课程\033[0m'.center(50, '#') % school_name)
                         course_dict = information(res_main[school], 'course')[0]
                         if_cont = input('\033[34;1m是否创建课程【y】创建【b】返回：\033[0m').strip()
                         if if_cont == 'y':
@@ -219,26 +272,24 @@ def school_center():
             print('\033[31;1m错误：该学校不存在.\033[0m')
 
 
-
-
 def init_database():
     sh = School('上海', '上海市')
     bj = School('北京', '北京市')
     if not os.path.exists(__db_main):
         with open(__db_main, 'wb') as f:
-            dict = {sh:{}, bj:{}}
+            dict = {sh: {}, bj: {}}
             pickle.dump(dict, f)
     if not os.path.exists(__db_teacher):
         with open(__db_teacher, 'wb') as f:
             dict = {}
             pickle.dump(dict, f)
 
+
 def options(list):
     for k, v in enumerate(list, 1):
         print(k, v)
     choice = input('\033[34;1m请选择模式：\033[0m').strip()
     return choice
-
 
 
 def start():
@@ -256,7 +307,6 @@ def start():
             break
         else:
             print('\033[31;1m错误：序号错误.\033[0m')
-
 
 
 if __name__ == '__main__':
