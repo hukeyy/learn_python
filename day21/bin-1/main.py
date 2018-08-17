@@ -70,11 +70,10 @@ class Grade(object):
     def cat_grade(self):
         print('\033[32;1m班级：【%s】\t课程：【%s】\t讲师：【%s】\033[0m' % (self.name, self.teacher, self.course))
 
-    def add_student(self, student_name, dict, teacher, file):
-        self.student.add(student_name)
-        dict[teacher] = {'teacher': self}
-        file_oper(file, 'wb', dict)
-
+    def add_student(self, studnent_name, res_teacher, teacher, file):
+        self.student.add(studnent_name)
+        res_teacher[teacher] = {'grade': self}
+        file_oper(file, 'wb', res_teacher)
 
 def file_oper(file, mode, *args):
     if mode == 'wb':
@@ -113,13 +112,12 @@ def information(res_main, mode, *args):
 
 
 def student_center():
-    print('\033[42;1m【欢迎进入学员中心】\033[0m')
+    print('\033[42;1m【学生中心】\033[0m')
     while True:
         choice = options(list_student)
-        # ["学员注册", "返回"]
         if choice == '1':
             print('\033[42;1m【学员注册】\033[0m')
-            student_name = input('\033[34;1m输入学生名：\033[0m').strip()
+            student_name = input('\033[34;1m输入学员名字：\033[0m').strip()
             res_main = file_oper(__db_main, 'rb')
             res_teacher = file_oper(__db_teacher, 'rb')
             school_dict = information(res_main, 'main')[0]
@@ -136,20 +134,19 @@ def student_center():
                                 if i.course == course.name:
                                     teacher = i
                                     grade = res_teacher[teacher]['grade']
-                            print('\033[32;1m课程：【%s】的费用为【%s】' % (course.name, course.price))
-                            if_pay = input('\033[34;1m是否支付当前费用 支付【y】\033[0m:').strip()
+                            print('\033[32;1m课程：【%s】的费用：【%s】\033[0m' % (course.name, course.price))
+                            if_pay = input('\033[34;1m是否支付费用 【y】支付：\033[0m').strip()
                             if if_pay == 'y':
-                                # (self, student_name, dict, teacher, file)
                                 grade.add_student(student_name, res_teacher, teacher, __db_teacher)
                                 print('\033[32;1m选课成功.\033[0m')
-                                any = input('\033[34;1m按任意键退出\033[0m').strip()
-
+                                any = input('\033[32;1m按任意键返回.\033[0m').strip()
 
                     else:
-                        print('\033[31;1m错误：课程信息有误.\033[0m')
+                        print('\033[31;1m错误：学校信息不存在。\033[0m')
 
             else:
-                print('\033[31;1m错误：学校信息有误.\033[0m')
+                print('\033[31;1m错误：学校信息不存在。\033[0m')
+
 
         elif choice == '2':
             break
@@ -158,11 +155,35 @@ def student_center():
 
 
 
-
 def teacher_center():
     print('\033[42;1m【教师中心】\033[0m')
+    res_teacher = file_oper(__db_teacher, 'rb')
+    teacher_dict = information(res_teacher, 'teacher_center')[0]
+    teacher_name = input('\033[34;1m输入要登录讲师的名字:\033[0m').strip()
+    if teacher_name in teacher_dict:
+        while True:
+            print('\033[32;1m欢迎进入讲师【%s】的管理中心\033[0m' % teacher_name)
+            choice = options(list_teacher)
+            teacher = teacher_dict[teacher_name]
+            grade = res_teacher[teacher]['grade']
+            # ["查看班级", "查看班级学员列表", "返回"]
+            if choice == '1':
+                print('\033[32;1m讲师：【%s】的班级信息\033[0m'.center(40, '-') % teacher.name)
+                print('\033[32;1m学校：【%s】\t课程：【%s】\t班级：【%s】'
+                      %(teacher.school, teacher.course, grade.name))
+                any = input('\033[34;1m输入任意键返回:\033[0m')
+            elif choice == '2':
+                print('\033[32;1m讲师：【%s】的班级学员列表\033[0m'.center(40, '-') % teacher.name)
+                print('\033[32;1m班级：【%s】\n学员：【%s】' % (grade.name, grade.student))
+                any = input('\033[34;1m输入任意键返回:\033[0m')
 
+            elif choice == '3':
+                break
+            else:
+                print('\033[31;1m错误：序号错误.\033[0m')
 
+    else:
+        print('\033[31;1m错误：输入的讲师不存在.\033[0m')
 
 
 
