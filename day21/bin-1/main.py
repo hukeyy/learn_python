@@ -156,34 +156,30 @@ def student_center():
 
 
 def teacher_center():
-    print('\033[42;1m【教师中心】\033[0m')
+    print('\033[42;1m【讲师中心】\033[0m')
     res_teacher = file_oper(__db_teacher, 'rb')
     teacher_dict = information(res_teacher, 'teacher_center')[0]
-    teacher_name = input('\033[34;1m输入要登录讲师的名字:\033[0m').strip()
+    teacher_name = input('\033[34;1m输入讲师的名字：\033[0m')
     if teacher_name in teacher_dict:
         while True:
-            print('\033[32;1m欢迎进入讲师【%s】的管理中心\033[0m' % teacher_name)
-            choice = options(list_teacher)
             teacher = teacher_dict[teacher_name]
             grade = res_teacher[teacher]['grade']
+            choice = options(list_teacher)
             # ["查看班级", "查看班级学员列表", "返回"]
             if choice == '1':
-                print('\033[32;1m讲师：【%s】的班级信息\033[0m'.center(40, '-') % teacher.name)
-                print('\033[32;1m学校：【%s】\t课程：【%s】\t班级：【%s】'
-                      %(teacher.school, teacher.course, grade.name))
-                any = input('\033[34;1m输入任意键返回:\033[0m')
+                print('\033[32;1m讲师【%s】的班级信息'.center(40, '-') % teacher.name)
+                print('\033[32;1m学校：【%s】\t课程：【%s】\t班级：【%s】' %(teacher.school, teacher.course, grade.name))
+                any = input('\033[34;1m输入任意键退出.\033[0m')
             elif choice == '2':
-                print('\033[32;1m讲师：【%s】的班级学员列表\033[0m'.center(40, '-') % teacher.name)
+                print('\033[32;1m讲师【%s】的班级学员信息'.center(40, '-') % teacher.name)
                 print('\033[32;1m班级：【%s】\n学员：【%s】' % (grade.name, grade.student))
-                any = input('\033[34;1m输入任意键返回:\033[0m')
+                any = input('\033[34;1m输入任意键退出.\033[0m')
 
             elif choice == '3':
                 break
             else:
                 print('\033[31;1m错误：序号错误.\033[0m')
 
-    else:
-        print('\033[31;1m错误：输入的讲师不存在.\033[0m')
 
 
 
