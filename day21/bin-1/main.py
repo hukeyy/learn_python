@@ -137,8 +137,6 @@ def student_center():
                             any = input('\033[32;1m输入任意键返回.\033[0m')
                         else:
                             break
-
-
                 else:
                     print('\033[31;1m错误：课程信息不存在.\033[0m')
 
