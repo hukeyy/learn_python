@@ -12,6 +12,7 @@ class School(object):
     def __init__(self, name, addr):
         self.name = name
         self.addr = addr
+
     def cat_school(self):
         print('\033[32;1m学校名：【%s】\t地址：【%s】\033[0m' % (self.name, self.addr))
 
@@ -44,12 +45,13 @@ class Teacher(object):
     def __init__(self, name, age, school, course, role='讲师'):
         self.name = name
         self.age = age
-        self.school =school
+        self.school = school
         self.course = course
         self.role = role
 
     def cat_teacher(self):
         print('\033[32;1m课程：【%s】\t讲师：【%s】\033[0m' % (self.course, self.name))
+
 
 class Grade(object):
     def __init__(self, name, course, teacher):
@@ -68,9 +70,6 @@ class Grade(object):
         file_oper(file, 'wb', res_teacher)
 
 
-
-
-
 def file_oper(file, mode, *args):
     if mode == 'wb':
         with open(file, mode) as f:
@@ -80,6 +79,7 @@ def file_oper(file, mode, *args):
         with open(file, mode) as f:
             data = pickle.load(f)
             return data
+
 
 def information(main_dict, mode, *args):
     if args:
@@ -107,43 +107,43 @@ def information(main_dict, mode, *args):
 
 
 def student_center():
-    print('\033[42;1m【学生中心】\033[0m')
+    print('\033[42;1m【学员中心】\033[0m')
     while True:
         choice = options(list_student)
         if choice == '1':
             print('\033[42;1m【学员注册】\033[0m')
             student_name = input('\033[34;1m输入学生名：\033[0m').strip()
-            res_main = file_oper(__db_main, 'rb')
+            res_mian = file_oper(__db_main, 'rb')
             res_teacher = file_oper(__db_teacher, 'rb')
-            school_dict = information(res_main, 'main')[0]
-            school_name = input('\033[34;1m输入学校名：\033[0m').strip()
+            school_dict = information(res_mian, 'main')[0]
+            school_name = input('\033[34;1m输入学校名：\033[0m')
             if school_name in school_dict:
                 school = school_dict[school_name]
-                course_dict = information(res_main[school], 'course')[0]
+                course_dict = information(res_mian[school], 'course')[0]
                 course_name = input('\033[34;1m输入课程名：\033[0m').strip()
                 if course_name in course_dict:
                     course = course_dict[course_name]
-                    if res_main[school][course].get('grade'):
+                    if res_mian[school][course].get('grade'):
                         for i in res_teacher:
                             if i.course == course.name:
                                 teacher = i
                                 grade = res_teacher[teacher]['grade']
-                        print('\033[34;1m课程：【%s】的费用【%s】\033[0m' % (course.name, course.price))
-                        if_pay = input('\033[34;1m是否支付当前费用 支付【y】:\033[0m').strip()
+                        print('\033[34;1m课程【%s】的费用【%s】\033[0m' %(course.name, course.price))
+                        if_pay = input('是否支付【y】支付：').strip()
                         if if_pay == 'y':
+                            # (self, student_name, res_teacher, teacher, file)
                             grade.add_student(student_name, res_teacher, teacher, __db_teacher)
-                            print('\033[32;1m选课成功.\033[0m')
-                            any = input('\033[34;1m输入任意键退出.\033[0m')
+                            print('\033[32;1m选课完成.\033[0m')
+                            any = input('\033[32;1m输入任意键返回.\033[0m')
+                        else:
+                            break
 
-                    else:
-                        print('\033[31;1m错误：输入的班级不存在.\033[0m')
 
                 else:
-                    print('\033[31;1m错误：输入的课程名不存在.\033[0m')
-
+                    print('\033[31;1m错误：课程信息不存在.\033[0m')
 
             else:
-                print('\033[31;1m错误：输入的学校名不存在.\033[0m')
+                print('\033[31;1m错误：学校信息不存在.\033[0m')
 
         elif choice == '2':
             break
@@ -152,23 +152,22 @@ def student_center():
 
 
 def teacher_center():
-    print('\033[42;1m【教师中心】\033[0m')
+    print('\033[42;1m【讲师中心】\033[0m')
     res_teacher = file_oper(__db_teacher, 'rb')
     teacher_dict = information(res_teacher, 'teacher_center')[0]
-    teacher_name = input('\033[34;1m输入要登录讲师的名字:\033[0m').strip()
-    while True:
-        if teacher_name in teacher_dict:
-            print('\033[32;1m欢迎进入讲师【%s】的管理中心\033[0m'.center(40, '#') % teacher_name)
+    teacher_name = input('\033[34;1m输入讲师的姓名：\033[0m').strip()
+    if teacher_name in teacher_dict:
+        while True:
             teacher = teacher_dict[teacher_name]
             grade = res_teacher[teacher]['grade']
             choice = options(list_teacher)
             # ["查看班级", "查看班级学员列表", "返回"]
             if choice == '1':
-                print('\033[35;1m讲师【%s】的班级信息\033[0m'.center(40, '#') % teacher_name)
-                print('\033[32;1m学校【%s】\t课程【%s】\t班级【%s】\033[0m' %(teacher.school, teacher.course, grade.name))
+                print('\033[32;1m讲师【%s】的班级信息'.center(40, '#') % teacher_name)
+                print('\033[32;1m学校：【%s】\t班级：【%s】\t课程：【%s】' % (teacher.school, teacher.course, grade.name))
                 any = input("\n\33[34;0m输入任意键退出当前\33[0m:")
             elif choice == '2':
-                print('\033[35;1m讲师【%s】的班级学员信息\033[0m'.center(40, '#') % teacher_name)
+                print('\033[32;1m讲师【%s】的班级学员信息'.center(40, '#') % teacher_name)
                 print('\033[32;1m班级：【%s】\n学员：【%s】\033[0m' % (grade.name, grade.student))
                 any = input("\n\33[34;0m输入任意键退出当前\33[0m:")
 
@@ -176,10 +175,6 @@ def teacher_center():
                 break
             else:
                 print('\033[31;1m错误：序号错误.\033[0m')
-
-
-
-
 
 
 def school_center():
@@ -201,11 +196,10 @@ def school_center():
                     while True:
                         print('\033[32;1m目前学校【%s】已有班级'.center(40, '#') % school_name)
                         course_dict = information(res_main[school], 'None')[0]
-                        set_info =set([])
+                        set_info = set([])
                         for i in course_dict:
                             k = course_dict[i]
                             grade_dict = information(res_main[school][k], 'grade', set_info)[1]
-
 
                         if_cont = input('\033[34;1m是否创建班级【y】创建【b】退出:\033[0m').strip()
                         if if_cont == 'y':
@@ -226,11 +220,6 @@ def school_center():
                                 print('\033[31;1m错误：课程信息不存在.\033[0m')
                         elif if_cont == 'b':
                             break
-
-
-
-
-
 
                 elif choice == '2':
                     print('\033[42;1m【招聘讲师】\033[0m')
@@ -294,8 +283,6 @@ def school_center():
             print('\033[31;1m错误：输入的学校不存在.\033[0m')
 
 
-
-
 def init_database():
     sh = School('上海', '上海市')
     bj = School('北京', '北京市')
@@ -308,11 +295,13 @@ def init_database():
             dict = {}
             pickle.dump(dict, f)
 
+
 def options(list):
     for k, v in enumerate(list, 1):
         print(k, v)
     choice = input('\033[34;1m请选择模式：\033[0m').strip()
     return choice
+
 
 def start():
     while True:
