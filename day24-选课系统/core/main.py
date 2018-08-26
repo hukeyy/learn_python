@@ -1,29 +1,29 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 # Author: hkey
-
+import pickle, os
 from conf import settings
-
+from core import file_oper
 
 # db_path = os.path.join(BASE_DIR, 'database')
 # main_list = ['学校中心', '讲师中心', '学生中心', '退出']
 # school_list = ['创建课程', '招聘讲师', '创建班级', '退出']
 
-def options(list):
-    for v, k in enumerate(list, 1):
-        print(v, k)
-
-    choice = input('\033[34;1m请选择模式：\033[0m').strip()
-    return choice
+from core.school_center import Manage_school
+# School_center
 
 
 
-def school_center():
-    print('\033[35;1m学校中心\033[0m')
-    flag = True
-    while flag:
-        print('\033[32;1m欢迎进入学校中心\033[0m'.center(50, '#'))
-        choice = options(settings.school_list)
+
+# def file_oper(file, mode, *args):
+#     if mode == 'wb':
+#         data = args[0]
+#         with open(file, mode) as f:
+#             pickle.dump(data, f)
+#     elif mode == 'rb':
+#         with open(file, mode) as f:
+#             data = pickle.load(f)
+#             return data
 
 
 def teacher_center():
@@ -36,10 +36,11 @@ def student_center():
 
 def main():
     while True:
-        choice = options(settings.main_list)
+        choice = file_oper.options(settings.main_list)
         if not choice: continue
         if choice == '1':
-            school_center()
+            m_school = Manage_school()
+            m_school.run_manage()
         elif choice == '2':
             teacher_center()
         elif choice == '3':
