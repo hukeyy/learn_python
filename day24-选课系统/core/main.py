@@ -10,6 +10,8 @@ from core import file_oper
 # school_list = ['创建课程', '招聘讲师', '创建班级', '退出']
 
 from core.school_center import Manage_school
+from core.teacher_center import Manage_teacher
+from core.student_center import Manage_student
 # School_center
 
 
@@ -33,6 +35,10 @@ def teacher_center():
 def student_center():
     print('\033[35;1m学生中心\033[0m')
 
+def init_database():
+    pass
+
+
 
 def main():
     while True:
@@ -43,8 +49,12 @@ def main():
             m_school.run_manage()
         elif choice == '2':
             teacher_center()
+            m_teacher = Manage_teacher()
+            m_teacher.run_mange()
         elif choice == '3':
-            student_center()
+            # student_center()
+            m_student = Manage_student()
+            m_student.run_manage()
         elif choice == '4':
             break
         else:
