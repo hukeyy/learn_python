@@ -14,11 +14,13 @@ class Manage_student(object):
             self.school_db = file_oper(settings.db_main_file, 'rb')
         else:
             print('\033[31;1m错误：未创建学校，请先创建学校.\033[0m')
+            exit()
 
         if os.path.exists(settings.db_teacher_file):
             self.teacher_db = file_oper(settings.db_teacher_file, 'rb')
         else:
             print('\033[31;1m错误：未招聘讲师，请先创建讲师信息.\033[0m')
+            exit()
 
     def run_manage(self):
         while True:
