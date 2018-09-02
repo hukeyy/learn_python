@@ -17,4 +17,3 @@ grade = Grade('三年二班', course)
 
 print(grade.course.name)
 print(grade.course.price)
-print(grade.course.time)
