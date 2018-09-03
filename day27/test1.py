@@ -333,26 +333,28 @@
 # # 20
 # # coding
 
-class Student(object):
-    def __init__(self, name):
-        self.name = name
-    def __getitem__(self, item):
-        print(self.__dict__[''])
-    def __delitem__(self, key):
-        self.__dict__.pop(key)
-
-s = Student('hkey')
-s.age = 20
-print(s.age)
-
-
-
-
-
-
-
-
-
+# class Student(object):
+#     def __init__(self, name):
+#         self.name = name
+#
+#     def __getitem__(self, item):
+#         return self.__dict__[item]
+#
+#     def __delitem__(self, key):
+#         self.__dict__.pop(key)
+#         print('执行我了。')
+#
+#
+# s = Student('hkey')
+# s.age = 20
+# print(s['name'])
+# print(s['age'])
+# del s['age']
+#
+# # 执行结果：
+# # hkey
+# # 20
+# # 执行我了。
 
 
 
