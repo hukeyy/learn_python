@@ -17,5 +17,5 @@
 import hashlib
 
 md5 = hashlib.md5()
-md5.update(bytes('hello', encoding='utf-8'))
+md5.update(bytes('admin0.123456', encoding='utf-8'))
 print(md5.hexdigest())
