@@ -87,6 +87,7 @@
 
 import os, hashlib
 
+
 class User(object):
     def __init__(self, name, passwd, file):
         self.name = name
@@ -97,6 +98,10 @@ class User(object):
         if hasattr(self, mode):
             func = getattr(self, mode)
             func()
+    def hash_pwd(self, pwd):
+        md5 = hashlib.md5()
+        md5.update(bytes(pwd, encoding='utf-8'))
+        return md5.hexdigest()
 
     def regist(self):
         if self.file in os.listdir('.'):
@@ -107,17 +112,20 @@ class User(object):
                 user_list.append(username)
             if self.name in user_list:
                 print('\033[31;1m用户名已存在.\033[0m')
-        else:
-            user_info = '%s:%s\n' %(self.name, self.passwd)
-            self.file_oper('a', user_info)
+                return None
+        md5_passwd = self.hash_pwd(self.passwd)
+        user_info = '%s:%s\n' %(self.name, md5_passwd)
+        self.file_oper('a', user_info)
+        print('\033[32;1m注册成功.\033[0m')
 
     def login(self):
         user_dict = dict()
         user_info = self.file_oper('r')
+        md5_pwd = self.hash_pwd(self.passwd)
         for user in user_info:
             username, password = user.strip().split(':')
             user_dict[username] = password
-        if self.name in user_dict and self.passwd == user_dict[self.name]:
+        if self.name in user_dict and md5_pwd == user_dict[self.name]:
             print('\033[32;1m登录成功.\033[0m')
         else:
             print('\033[31;1m登录失败.\033[0m')
@@ -129,7 +137,6 @@ class User(object):
                 f.write(user_info)
         elif mode == 'r':
             with open(self.file, mode) as f:
-                # user_info = f.read()
                 user_info = f.readlines()
                 return user_info
 
@@ -146,10 +153,10 @@ if __name__ == '__main__':
         password = input('password:').strip()
         if choice == '1':
             user = User(username, password, 'user.txt')
-            user.options('regist')
+            user.regist()
         elif choice == '2':
             user = User(username, password, 'user.txt')
-            user.options('login')
+            user.login()
 
 
 

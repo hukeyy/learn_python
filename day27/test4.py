@@ -3,13 +3,19 @@
 # Author: hkey
 
 # dict1 = {'hkey': '123'}
-def regist():
-    user = input('user:')
-    pwd = input('pwd:')
+# def regist():
+#     user = input('user:')
+#     pwd = input('pwd:')
+#
+#     dict2 = {'hkey': '123', 'xiaofei':'123'}
+#
+#     if user in dict2 and pwd == dict2[user]:
+#         print('ok')
+#     else:
+#         print('bad')
 
-    dict2 = {'hkey': '123', 'xiaofei':'123'}
+import hashlib
 
-    if user in dict2 and pwd == dict2[user]:
-        print('ok')
-    else:
-        print('bad')
+md5 = hashlib.md5()
+md5.update(bytes('hello', encoding='utf-8'))
+print(md5.hexdigest())
