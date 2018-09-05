@@ -39,7 +39,7 @@
 # # 【读取文件所有内容：】 哪里有彩虹告诉我能不能把我的愿望还给我
 
 
-# f = open('caihong.txt', 'r', encoding='utf-8')
+# f = open('rainbow.txt', 'r', encoding='utf-8')
 # for i in f:
 #     print(i.strip())
 
