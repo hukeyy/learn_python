@@ -38,7 +38,6 @@ ch.setFormatter(formatter)
 logger.addHandler(fh)
 logger.addHandler(ch)
 
-
 logger.debug('debug message.')
 logger.info('info message.')
 logger.warning('warning message.')

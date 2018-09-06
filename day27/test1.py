@@ -230,7 +230,7 @@
 #
 # # 执行结果：
 # # >>>ls
-# # ['test1.py']
+# # ['logger.py']
 # # >>>asdfadf
 # # -bash: asdfadf: command not found
 
@@ -277,10 +277,10 @@
 # '''
 # 程序目录：
 #     module_test.py
-#     test1.py
+#     logger.py
 #
 # 当前文件:
-#     test1.py
+#     logger.py
 # '''
 #
 # import module_test as obj
