@@ -38,6 +38,7 @@ class Logger(object):
     def critical(self, message):
         self.logger.critical(message)
 
+
 if __name__ == '__main__':
     logger = Logger('test2.txt', logging.INFO, logging.INFO)
     logger.info('hello world。')
