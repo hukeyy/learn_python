@@ -146,9 +146,27 @@
 # # 执行结果：
 # # [1, 3, 5, 7, 9]
 
+# tu = (1,2,3,['xiaofei', 'kk'], 'hkey')
+#
+# tu[3][0] = tu[3][0].upper()
+# print(tu)
+#
+# # 执行结果：
+# # (1, 2, 3, ['XIAOFEI', 'kk'], 'hkey')
 
+# name = ['xiaofei', 'hkey']
+# print(''.join(name))    # 以空为分隔符将列表连接成字符串类型
+# print('*'.join(name))   # 以*为分隔符将列表连接成字符串类型
+#
+# # 执行结果：
+# # xiaofeihkey
+# # xiaofei*hkey
 
-
+# s1 = 'xiaofei hkey'
+# print(s1.split())
+#
+# # 执行结果：
+# # ['xiaofei', 'hkey']
 
 
 
