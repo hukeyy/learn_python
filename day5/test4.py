@@ -3,7 +3,6 @@
 # Author: hkey
 
 import pickle
-
 db_file = 'user.db'
 goods = [
     {'name':'apple', 'price': 10},
