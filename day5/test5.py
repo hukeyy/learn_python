@@ -1,17 +1,19 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 # Author: hkey
-import pickle
-# data = {'name':'hkey', 'price': 200}
-file = 'abc.db'
-# with open(f, 'wb') as f:
-#     pickle.dump(data, f)
 
-with open(file, 'rb') as f:
-    data = pickle.load(f)
+li = [
+{'name': 'banana', 'price': 10},
+{'name': 'apple', 'price': 20},
+{'name': 'pear', 'price': 30},
+]
 
-print(data, type(data))
+d1 = {'name': 'mongo', 'price': 40}
+li.append(d1)
 
+s1 = 'hello world'
+
+print('a\rb\rc\r')
 
 
 
