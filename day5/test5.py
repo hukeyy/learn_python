@@ -8,12 +8,31 @@ li = [
 {'name': 'pear', 'price': 30},
 ]
 
-d1 = {'name': 'mongo', 'price': 40}
-li.append(d1)
+for i in li:
+    print(i)
+else:
+    print('bad')
 
-s1 = 'hello world'
 
-print('a\rb\rc\r')
+
+# l1 = [
+# {'name': 'apple', 'num': 2, 'prices': 40},
+# {'name': 'pear', 'num': 1, 'prices': 20}
+# ]
+#
+#
+# d1 = {'name': 'apple', 'num': 2, 'prices': 40}
+#
+# for i in l1:
+#     if d1['name'] == i['name']:
+#         i['num'] += d1['num']
+#         i['prices'] += d1['prices']
+#
+# print(l1)
+
+
+
+
 
 
 
