@@ -8,7 +8,14 @@
 set1 = {1, 2, 3, 4}
 set2 = {2, 3, 4, 7}
 
-print(set1 - set2)
+s1 = frozenset(set1)
+print(s1, type(s1))
+
+# 执行结果：
+# frozenset({1, 2, 3, 4}) <class 'frozenset'>
+
+
+# print(set1 - set2)
 
 # 执行结果：
 # {1}
