@@ -5,9 +5,9 @@ import logging,os
 import ctypes
 
 FOREGROUND_WHITE = 0x0007
-FOREGROUND_BLUE = 0x01 # text color contains blue.
-FOREGROUND_GREEN= 0x02 # text color contains green.
-FOREGROUND_RED  = 0x04 # text color contains red.
+FOREGROUND_BLUE = 0x01 # text.txt color contains blue.
+FOREGROUND_GREEN= 0x02 # text.txt color contains green.
+FOREGROUND_RED  = 0x04 # text.txt color contains red.
 FOREGROUND_YELLOW = FOREGROUND_RED | FOREGROUND_GREEN
 
 
