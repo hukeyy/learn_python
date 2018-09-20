@@ -60,19 +60,19 @@
 # # c.func()
 
 # class Data_test2(object):
-#     day = 0
+#     day9 = 0
 #     month = 0
 #     year = 0
 #
-#     def __init__(self, year=0, month=0, day=0):
-#         self.day = day
+#     def __init__(self, year=0, month=0, day9=0):
+#         self.day9 = day9
 #         self.month = month
 #         self.year = year
 #
 #     @classmethod
 #     def get_date(cls, string_date):
-#         year, month, day = map(int, string_date.split('-'))
-#         date1 = cls(year, month, day)
+#         year, month, day9 = map(int, string_date.split('-'))
+#         date1 = cls(year, month, day9)
 #         return date1
 #
 #
@@ -81,8 +81,8 @@
 #         print(self.year)
 #         print('month:')
 #         print(self.month)
-#         print('day:')
-#         print(self.day)
+#         print('day9:')
+#         print(self.day9)
 #
 # r = Data_test2.get_date(' 2018-02-04')
 # r.out_data()
