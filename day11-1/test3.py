@@ -52,7 +52,7 @@
 # # after: log2
 # # after: log1
 
-Flag = False  # Flag = True的时候使用装饰器中附加功能，否则不使用装饰器中的附加功能
+Flag = True  # Flag = True的时候使用装饰器中附加功能，否则不使用装饰器中的附加功能
 
 
 def log(flag):
