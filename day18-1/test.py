@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # Author: hkey
 import re
+
 s = '1 - 2 * ( (60-30 +(-40/5) * (9-2*5/3 + 7 /3*99/4*2998 +10 * 568/14 )) - (-4*3)/ (16-3*2) )'
 
 
@@ -11,7 +12,7 @@ def wipe(s):
     :param s: 只剩下加减运算的表达式
     :return: 去除多余的表达式符号
     '''
-    res = s.replace('+-', '-').replace('-+', '-').replace('++', '+').replace('--', '+') # 通过replace进行替换
+    res = s.replace('+-', '-').replace('-+', '-').replace('++', '+').replace('--', '+')  # 通过replace进行替换
     return res
 
 
@@ -21,8 +22,8 @@ def get(s):
     :param s: 最原始的运算表达式
     :return: 返回list，其中其中索引为1的元素就是最内层括号第一个首先要计算的表达式
     '''
-    no_space_exp = re.sub(' ', '', s)   # re.sub 去除表达式中的空格符
-    res = re.split("(\([^()]+\))", no_space_exp, 1) # 分解成列表且索引为1的元素即第一个要计算的表达式
+    no_space_exp = re.sub(' ', '', s)  # re.sub 去除表达式中的空格符
+    res = re.split("(\([^()]+\))", no_space_exp, 1)  # 分解成列表且索引为1的元素即第一个要计算的表达式
     return res
 
 
@@ -32,11 +33,11 @@ def add_num(s):
     :param s: 去括号后的计算表达式
     :return: 加减表达式计算后的结果值
     '''
-    s = wipe(s) # 进行加减运算的时候，去除掉多余的符号
-    list_num = re.findall("([+-]?\d+\.?\d*)", s)    # 查找表达式中的每个具体的数字
+    s = wipe(s)  # 进行加减运算的时候，去除掉多余的符号
+    list_num = re.findall("([+-]?\d+\.?\d*)", s)  # 查找表达式中的每个具体的数字
     k = 0
     for i in list_num:
-        k += float(i)   # 进行累加操作
+        k += float(i)  # 进行累加操作
     return k
 
 
@@ -47,19 +48,19 @@ def mul(s):
     :return: 加减函数
     '''
     while True:
-        res = re.split("(\d+\.?\d*[*/][+-]?\d+\.?\d*)", s, 1)   # 获取括号内的计算表达式
-        if len(res) == 3 and '*' in res[1]: # 判断计算表达式是否是乘法计算
+        res = re.split("(\d+\.?\d*[*/][+-]?\d+\.?\d*)", s, 1)  # 获取括号内的计算表达式
+        if len(res) == 3 and '*' in res[1]:  # 判断计算表达式是否是乘法计算
             a, b, c = res
             d, e = b.split('*')
-            res_b = float(d) * float(e) # 进行乘法计算
+            res_b = float(d) * float(e)  # 进行乘法计算
             s = a + str(res_b) + c  # 括号内计算的结果替换掉带括号的表达式
-        elif len(res) == 3 and '/' in res[1]:   # 判断计算表达式是否是除法计算
+        elif len(res) == 3 and '/' in res[1]:  # 判断计算表达式是否是除法计算
             a, b, c = res
             d, e = b.split('/')
-            res_b = float(d) / float(e) # 进行除法计算
+            res_b = float(d) / float(e)  # 进行除法计算
             s = a + str(res_b) + c  # 括号内计算的结果替换掉带括号的表达式
         else:
-            return add_num(s)   # 如果表达式不存在乘法和除法，则进行加减运算
+            return add_num(s)  # 如果表达式不存在乘法和除法，则进行加减运算
 
 
 def counter(s):
@@ -79,19 +80,3 @@ def counter(s):
 
 
 print(counter(s))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
