@@ -10,7 +10,7 @@ try:
 
 except Exception as e:
     print('Error:', e)
-    print('Usage: test2.py filename1 filename2')
+    print('Usage: random_num.py filename1 filename2')
     sys.exit()
 
 
@@ -26,7 +26,7 @@ def readfile(filename):
 
 
 if textfile1 == '' or textfile2 == '':
-    print('Usage: test2.py filename1 filename2')
+    print('Usage: random_num.py filename1 filename2')
     sys.exit()
 
 text1_lines = readfile(textfile1)
