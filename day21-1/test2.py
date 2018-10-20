@@ -139,15 +139,150 @@
 # li = [1, 3, 2, "a", 4, "b", 5, "c"]
 # l6 = reversed(li[1:6:2])
 # print(list(l6))
-lis = [2,3,"k",["qwe",20,["k1",["tt",3,"1"]],89],"ab","adv"]
+# lis = [2,3,"k",["qwe",20,["k1",["tt",3,"1"]],89],"ab","adv"]
+# lis.insert(1, 100)
+# lis.pop(2)
+# lis[3][2][1].insert(1, 100)
+# lis[3][2][1].pop(2)
+# print(lis)
 
-lis[1] = 100
-lis[3][2][1][1] = 100
-print(lis)
+# lis = [2,3,"k",["qwe",20,["k1",["tt",3,"1"]],89],"ab","adv"]
+# lis[3][2][1].insert(3, 101)
+# print(lis)
+# lis[3][2][1].pop(-2)
+# print(lis)
+
+# li = ["alex","eric","rain"]
+# print("_".join(li))
+
+# li = ["taibai ","alexC","AbC ","egon","Ritian"," Wusir"," agc"]
+# l2 = []
+# for k in li:
+#     k = k.strip()
+#     if k.capitalize().startswith('A') and k.endswith('c'):
+#         l2.append(k)
+#
+# print(l2)
 
 
+# li = ["苍老师","东京热","武藤兰","波多野结衣"]
+# while True:
+#     str1 = input('>>>').strip()
+#     if str1 in li:
+#         str1 = str1.replace(str1, '***')
+#     print(str1)
+
+# li = [1,3,4, 'xiaom', [3,7,8, [5,6,7,8], 'taibai'],5,'hotdog']
+#
+# def func(lis):
+#     for i in lis:
+#         if isinstance(i, list):
+#             return func(i)
+#         print(i)
+#
+# func(li)
+
+# lic = [0, 1, 2, 3, 4, 5]
+# def func(l):
+#     return l[1::2]
+# print(func(lic))
+
+# def func(s):
+#     if len(s) > 5:
+#         print('%s > 5' % s)
+#     elif len(s) <= 5:
+#         print('%s <= 5' % s)
 
 
+# def func(n):
+#     return n[:2]
+
+
+# context = input('>>>')
+#
+# def func(arg):
+#     dic = {'数字':0, '字母':0, '空格':0, '其他':0}
+#     for i in arg:
+#         if i.isdigit():
+#             dic['数字'] += 1
+#         elif i.isalpha():
+#             dic['字母'] += 1
+#         elif i.isspace():
+#             dic['空格'] += 1
+#         else:
+#             dic['其他'] += 1
+#     return dic
+#
+# print(func(context))
+
+# l = ['a', ' b', 'c ', 'hel   lo', 1, 2, 3]
+# def func(arg):
+#     for i in arg:
+#         i = str(i)
+#         if ' ' in i:
+#             print('%s 内有空格' % i)
+#
+#         else:
+#             print(i)
+# func(l)
+# dic = {1: 123, 'a': 'hello', 'b':['world', 'nice', 'bigbang']}
+#
+# def func(dic):
+#     for k, v in dic.items():
+#         if not isinstance(v, (int, float, bool)):
+#             dic[k] = v[:2]
+#     return dic
+#
+# print(func(dic))
+
+# print(max(1, 10))
+
+# import os
+#
+# file_name = input('文件名：')
+# be_modify = input('要修改的内容：')
+# af_modify = input('要替换的内容：')
+#
+# def func(file, be_f, af_f):
+#     with open(file, 'r', encoding='utf-8') as read_f, open(file+'_new', 'w', encoding='utf-8') as write_f:
+#         for line in read_f:
+#             if be_f in line:
+#                 new_line = line.replace(be_f, af_f)
+#                 write_f.write(new_line)
+#             else:
+#                 write_f.write(line)
+#     os.remove(file_name)
+#     os.rename(file_name + '_new', file_name)
+#
+#
+# func(file_name, be_modify, af_modify)
+
+def regist():
+    while True:
+        user = input('user:').strip()
+        if not user: continue
+        else:
+            break
+    pwd = input('pwd:').strip()
+    dic = ('注册账号：{}, 密码：{}'.format(user, pwd))
+    return dic
+
+# print(regist())
+
+
+def login():
+    count = 1
+    while count < 4:
+        username = input('username:')
+        password = input('password:')
+        if username == 'hkey' and password == '123':
+            print('登录成功.')
+            return
+        else:
+            print('登录失败.')
+        count += 1
+
+login()
 
 
 
