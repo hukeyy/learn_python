@@ -3,9 +3,13 @@
 # Author: hkey
 
 class School:
-    def __init__(self, name, city):
+    def __init__(self, name, addr):
         self.name = name
-        self.city = city
+        self.addr = addr
+
+    def cat_school(self):
+        print('\033[32;1m学校名：【%s】, 地址：【%s】\033[0m' % (self.name, self.addr))
+
 
     def create_course(self, course):
         self.course = course
