@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # Author: hkey
 
+
 class Person(object):
     def __init__(self, name, hp, aggr, job):
         self.name = name
