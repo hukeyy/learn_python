@@ -245,19 +245,35 @@ from abc import ABCMeta, abstractclassmethod
 #
 # apple = Applepay()  # 实例化就能检查出子类是否创建了 pay 方法
 
+
 class Animal:
-    pass
+    def run(self):
+        print('Animal is running...')
 
 class Dog(Animal):
-    pass
+    def run(self):
+        print('dog is running...')
+
+class Cat(Animal):
+    def run(self):
+        print('cat is running...')
 
 
+class Tortoise(Animal):
+    def run(self):
+        print('tortoise is running...')
 
+class Timer:
+    def run(self):
+        print('Start...')
 
+def run_twice(animal):
+    animal.run()
+    animal.run()
 
+timer = Timer()
 
-
-
+run_twice(timer)
 
 
 
