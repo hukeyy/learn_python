@@ -3,15 +3,10 @@
 # Author: hkey
 import os, sys
 
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 sys.path.append(BASE_DIR)
 
-from core import main
-from conf import config
+from core.main import run
 
 if __name__ == '__main__':
-    obj = main.Manage_center()
-    obj.run()
-
+    run()

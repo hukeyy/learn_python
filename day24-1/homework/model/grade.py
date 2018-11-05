@@ -4,7 +4,9 @@
 
 
 class Grade(object):
-    def __init__(self, name, course_obj):
-        self.name = name
+    def __init__(self, grade_name, course_obj):
+        self.grade_name = grade_name
         self.course_obj = course_obj
-        self.student = {}
+
+    def cat_course(self):
+        pass
