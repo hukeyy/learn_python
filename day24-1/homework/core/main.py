@@ -3,6 +3,8 @@
 # Author: hkey
 
 from core.school_center import School_center
+from core.student_center import Student_center
+from core.teacher_center import Teacher_center
 from model.tools import option
 
 
@@ -13,9 +15,9 @@ def run():
         if choice == '1':
             School_center()
         elif choice == '2':
-            pass
+            Teacher_center()
         elif choice == '3':
-            pass
+            Student_center()
         elif choice == '4':
             break
 
