@@ -4,7 +4,7 @@
 import pymysql
 
 mysql_dict = {
-        'host': '172.168.20.188',
+        'host': '172.168.20.187',
         'port': 3306,
         'user': 'dba',
         'passwd': 'dba@wsd.com',
