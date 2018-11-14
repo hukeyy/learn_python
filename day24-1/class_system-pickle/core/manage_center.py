@@ -2,11 +2,14 @@
 # -*- coding: utf-8 -*-
 # Author: hkey
 from core.school_center import School_center
+from core.student_center import Student_center
+from core.teacher_center import Teacher_center
 
 
 class Manage_center(object):
     def __init__(self):
         pass
+
     def run(self):
         while True:
             print('1. 学校中心\n'
@@ -24,4 +27,3 @@ class Manage_center(object):
                 break
             else:
                 print('\033[31;1m输入错误，请重新输入.\033[0m')
-                

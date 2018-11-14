@@ -3,6 +3,7 @@
 # Author: hkey
 import pickle
 
+
 def file_oper(file, mode, *args):
     if mode == 'wb':
         data = args[0]
