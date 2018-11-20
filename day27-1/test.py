@@ -235,31 +235,192 @@
 # print('------')
 # del f.age   # __delattr__
 
+# class Fib:
+#     def __getitem__(self, item):
+#         if isinstance(item, int):
+#             a, b = 1, 1
+#             for x in range(item):
+#                 a, b = b, a+b
+#             return a
+#         if isinstance(item, slice):
+#             start = item.start
+#             stop = item.stop
+#             if start is None:
+#                 start = 0
+#             a, b = 1, 1
+#             L = []
+#             for x in range(stop):
+#                 if x >= start:
+#                     L.append(a)
+#                 a, b = b, a+b
+#             return L
+#
+# f = Fib()
+# print(f[9])
+# print(f[:10])
+
+# class Person:
+#     def __init__(self, name):
+#         self.name = name
+#     def __repr__(self):
+#         return "hello %s." % self.name
+#     # def __str__(self):
+#     #     return 'hi %s.' % self.name
+#
+# p = Person('hkey')
+# print(p)
+
+# class Foo(object):
+#
+#     def __new__(cls, *args, **kwargs):
+#         return object.__new__(cls)
+#
+#     def __init__(self, name):
+#         self.name = name
+#
+#
+# f = Foo('hkey')
+# print(f.name)
+
+
+# class Foo:
+#     def __init__(self):
+#         self.a = 1
+#         self.b = 5
+#
+#     def __hash__(self):
+#         return hash(str(self.a) + str(self.b))
+#
+#
+# f = Foo()
+# print(hash(f))
+#
+#
+# # 执行结果：
+# 2068706206124340336
+
+# class Foo:
+#     def __init__(self):
+#         self.a = 1
+#         self.b = 5
+#
+#     def __eq__(self, other):
+#         if self.a == other.a and self.b == other.b:
+#             return True
+#         return False
+#
+# a = Foo()
+# b = Foo()
+# print(a == b)   # 执行这个比较的时候，就调用了 __eq__ 方法
+#
+# # 执行结果：
+# True
+
+# from collections import namedtuple
+#
+# Card = namedtuple('Card', ['rank', 'suit'])
+#
+#
+# class FranchDeck:
+#     ranks = [x for x in range(2, 11)] + list('JQKA')
+#     suits = ['红桃', '黑桃', '方块', '梅花']
+#
+#     def __init__(self):
+#         '''创建一副牌'''
+#         self._card = [Card(rank, suit) for rank in FranchDeck.ranks for suit in FranchDeck.suits]
+#
+#     def __len__(self):
+#         '''统计牌数'''
+#         return len(self._card)
+#
+#     def __getitem__(self, item):
+#         '''通过object[index]取牌'''
+#         return self._card[item]
+#
+#     def __setitem__(self, key, value):
+#         '''调用 shuffle 的时候需要有__setitem__方法'''
+#         self._card[key] = value
+#
+#
+# f = FranchDeck()
+# print(f[:4])    # 按照顺序取牌
+# from random import shuffle
+# shuffle(f)  # 随机排列
+# print(f[:4])    # 切片随机取4张
+
 class Fib:
     def __getitem__(self, item):
+        a, b = 1, 1
         if isinstance(item, int):
-            a, b = 1, 1
             for x in range(item):
-                a, b = b, a + b
+                a, b = b, a +b
             return a
         if isinstance(item, slice):
-            print('item:', item)
             start = item.start
             stop = item.stop
-            print('stop:', stop)
             if start is None:
                 start = 0
             a, b = 1, 1
             L = []
             for x in range(stop):
-                if x >= start:
+                if a >= start:
                     L.append(a)
-                a, b = b, a + b
+                a, b = b, a+b
             return L
 
 
 f = Fib()
-print(f[:5])
+print(f[:10])
+
+
+from collections import namedtuple
+from random import shuffle
+
+Card = namedtuple('Card', ['rank', 'cuit'])
+
+class FranchDeck:
+    ranks = [x for x in range(2, 11)] + list('JQKA')
+    cuits = ['红桃', '黑桃', '方块', '梅花']
+    def __init__(self):
+        self._cards = [Card(rank, cuit) for rank in FranchDeck.ranks for cuit in FranchDeck.cuits]
+    def __getitem__(self, item):
+        return self._cards[item]
+    def __setitem__(self, key, value):
+        self._cards[key] = value
+    def __len__(self):
+        return len(self._cards)
+
+f = FranchDeck()
+print(f[:4])
+shuffle(f)
+print(f[:4])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
