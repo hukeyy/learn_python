@@ -109,7 +109,7 @@ import logging
 # logger.error('error message.')
 # logger.critical('critical message.')
 
-import random, re
+# import random, re
 
 # r = random.choice('abcdefg')
 # print(r)
@@ -117,8 +117,8 @@ import random, re
 # print(re.match('com','Comwww.runcomoob', re.I).group())
 
 
-r = re.match('dcom','comwww.runcomoob')
-print(r)
+# r = re.match('dcom','comwww.runcomoob')
+# print(r)
 
 
 
