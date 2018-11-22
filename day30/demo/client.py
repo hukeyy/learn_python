@@ -15,6 +15,8 @@ if res == '200':
     while True:
         cmd = input('>>>').strip()
         sk.send(cmd.encode())
+        cmd_res = sk.recv(1024)
+        print(cmd_res.decode('gbk'))
 
 else:
     print('\033[31;1m[%s]登录失败.\033[0m' % res)

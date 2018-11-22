@@ -16,14 +16,12 @@ while True:
         conn.send('200'.encode())
         while True:
             res = conn.recv(1024).decode()
-            print('res:', res)
             cmd_res = subprocess.Popen(res, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            print(cmd_res.stdout.read())
-            print(cmd_res.stderr.read())
-            # cmd_result = cmd_res.stdout.read().decode('gbk') if cmd_res.stdout.read().decode('gbk') \
-            #     else cmd_res.stderr.read().decode('gbk')
-            # print(cmd_result)
-            # conn.send(cmd_res)
+
+            stdout = cmd_res.stdout.read()
+            stderr = cmd_res.stderr.read()
+            result = stdout if stdout else stderr
+            conn.send(result)
     else:
         conn.send('403'.encode())
         break
@@ -32,7 +30,9 @@ conn.close()
 sk.close()
 
 
-
+class Command:
+    def __init__(self, command):
+        self.command = command
 
 
 
