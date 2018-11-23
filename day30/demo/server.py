@@ -51,7 +51,12 @@ class FtpServer:
                             % FtpServer.current_path).encode())
 
     def get(self, file):
-        pass
+        if os.path.isfile((os.path.join(FtpServer.current_path, file))):
+            current_file = os.path.join(FtpServer.current_path, file)
+
+
+            self.conn.send(b'200')
+
 
 
 
