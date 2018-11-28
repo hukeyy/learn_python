@@ -11,7 +11,7 @@ f_name, f_size = f_info.split('|')
 if f_size.isdigit():
     f_size = int(f_size)
 revice_size = 0
-with open(f_name, 'ab') as f:
+with open(f_name, 'wb') as f:
     while revice_size != f_size:
         data = sk.recv(1024)
         revice_size += len(data)
