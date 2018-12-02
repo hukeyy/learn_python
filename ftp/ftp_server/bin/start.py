@@ -11,7 +11,7 @@ if __name__ == '__main__':
     user = input('user:')
     pwd = input('pwd:')
     obj = Auth(user, pwd)
-    obj.regist()
+    obj.login()
 
 
 

@@ -14,7 +14,7 @@ class Auth:
             user_list = []
             with open(file, mode) as f:
                 for line in f:
-                    user_list.append(line)
+                    user_list.append(line.strip())
             return user_list
         elif mode == 'a':
             user = args[0] + '\n'
@@ -30,6 +30,7 @@ class Auth:
                 os.makedirs(home_path)
             user_dict = {'name': self.user, 'password': self.pwd, 'home_path': home_path, 'quota': 102400}
             user_json = json.dumps(user_dict)
+            print('user_json:', user_json)
             user_home = os.path.join(DB_PATH, self.user)
             with open(user_home+'.json', 'a') as f:
                 f.write(user_json)
@@ -37,8 +38,16 @@ class Auth:
 
         else:
             print('\033[31;1m该用户已存在.\033[0m')
+
     def login(self):
-        pass
+        user_list = Auth.user_oper(USER_LIST_FILE, 'r')
+        if self.user in user_list:
+            user_home = os.path.join(DB_PATH, self.user)
+            user_json = Auth.user_oper(user_home+'.json', 'r')[0]
+            return json.loads(user_json)
+        else:
+            print('\033[31;1m该用户名不存在.\033[0m')
+
 
 
 

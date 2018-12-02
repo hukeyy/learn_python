@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 # Author: hkey
 
-import os, subprocess
+import redis
 
-# print('12312'.isdigit())
-
-result = subprocess.run('dir', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-print(result.stdout.read())
-
+conn = redis.Redis(host='192.168.118.104', port=6379, db='0')
+r = conn.pipeline()
+for i in range(10000):
+    r.set(i, 'Test')
+r.execute()
 
 
 
