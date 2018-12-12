@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 # Author: hkey
-from modules.logger import logger
+from modules.log import logger
 
 logger.info('okok.')
 
