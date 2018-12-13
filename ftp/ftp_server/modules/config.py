@@ -4,16 +4,17 @@
 import configparser
 import os, sys
 
-if os.path.isfile(os.path.join('conf', 'config.ini')):
-    f_ini = os.path.join('conf', 'config.ini')
-else:
-    sys.exit('配置文件不存在。')
 
+def config():
+    BASE_DIR = os.path.dirname(os.getcwd())
+    if os.path.isfile(os.path.join(BASE_DIR, 'conf', 'config.ini')):
+        f_ini = os.path.join(BASE_DIR, 'conf', 'config.ini')
+    else:
+        sys.exit('配置文件不存在。')
 
-class Config:
     config = configparser.ConfigParser()
     config.read(f_ini)
-
+    return config
 
 
 
