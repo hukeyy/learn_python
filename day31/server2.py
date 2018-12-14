@@ -8,10 +8,15 @@ import subprocess
 class Ftp_server(socketserver.BaseRequestHandler):
     def handle(self):
         while True:
-            cmd = self.request.recv(1024).decode()
-            if not cmd: continue
-            if hasattr(self, cmd):
-                getattr(self, cmd)()
+            try:
+                cmd = self.request.recv(1024).decode()
+                if not cmd: continue
+                if hasattr(self, cmd):
+                    getattr(self, cmd)()
+            except ConnectionResetError as e:
+                print('Error:', e)
+                break
+
 
     def ipconfig(self):
         p = subprocess.Popen('ipconfig', stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
@@ -23,7 +28,7 @@ class Ftp_server(socketserver.BaseRequestHandler):
         self.request.sendall(res)
 
 
-server = socketserver.ThreadingTCPServer(('127.0.0.1', 8080), Ftp_server)
+server = socketserver.ThreadingTCPServer(('127.0.0.1', 9090), Ftp_server)
 server.serve_forever()
 
 

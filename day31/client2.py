@@ -4,7 +4,7 @@
 import socket, struct
 
 sk_client = socket.socket()
-sk_client.connect(('127.0.0.1', 8080))
+sk_client.connect(('127.0.0.1', 9090))
 while True:
     cmd = input('>>>').strip()
     if not cmd: continue

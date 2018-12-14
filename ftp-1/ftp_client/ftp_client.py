@@ -2,10 +2,9 @@
 # -*- coding: utf-8 -*-
 # Author: hkey
 import socket
-# import os, sys, pickle
 
 
-class Myclient:
+class MyClient:
     def __init__(self, ip_port):
         self.client = socket.socket()
         self.ip_port = ip_port
@@ -16,36 +15,71 @@ class Myclient:
     def start(self):
         self.connect()
         while True:
-            print('1.注册\n2.登录\n')
+            print('注册(register)\n登录(login)')
+            user_type = input('请选择：').strip()
+            if not user_type: continue
+            if user_type == 'register' or user_type == 'login':
+                username = input('输入用户名:').strip()
+                password = input('输入密码:').strip()
+                auth_info = '%s:%s:%s' %(username, password, user_type)
+                self.client.send(auth_info.encode())
+                auth_code = self.client.recv(1024).decode()
+                print('auth_code:', auth_code)
+                if auth_code == '200':
+                    print('\033[32;1m登录成功.\033[0m')
+                    self.interactive()
+                elif auth_code == '201':
+                    print('\033[32;1m注册成功，请登录.\033[0m')
+                elif auth_code == '401':
+                    print('\033[31;1m用户名已使用，请重新注册.\033[0m')
 
-            choice = input('>>>').strip()
-            if choice == '1':
-                # self.client.send(b'register')
-                self.auth('register')
-            elif choice == '2':
-                # self.client.send(b'login')
-                self.auth('login')
             else:
-                print('\033[31;1m输入错误，请重新输入')
-
-    def auth(self, type):
-        username = input('username:').strip()
-        password = input('password:').strip()
-        login_info = '%s:%s:%s' % (username, password, type)
-        self.client.sendall(login_info.encode())
-        status_code = self.client.recv(1024).decode()
-        print(status_code)
-        if status_code == '400':
-            print('[%s] 用户密码错误!' % status_code)
-        elif status_code == '200':
-            print('[%s] 登录成功！' % status_code)
-            self.interactive()
+                print('\033[31;1m输入错误，请重新输入.\033[0m')
 
     def interactive(self):
-        pass
+        while True:
+            command = input('>>>').strip()
+            if not command: continue
+            command_str = command.split()[0]
+            if hasattr(self, command_str):
+                func = getattr(self, command_str)
+                func(command)
+
+    def dir(self, command):
+        self.__unviersal_method_data(command)
+
+    def pwd(self, command):
+        self.__unviersal_method_data(command)
+
+    def mkdir(self, command):
+        self.__universal_method_none(command)
+
+    def __universal_method_none(self, command):
+        self.client.sendall(command.encode())
+        status_code = self.client.recv(1024)
+        if status_code == '202':
+            self.client.sendall(b'000')
+        else:
+            print('[%s] Error!' % status_code)
+
+    def __unviersal_method_data(self, command):
+        self.client.sendall(command.encode())
+        status_code = self.client.recv(1024).decode()
+        if status_code == '203':
+            self.client.sendall(b'000')
+            result = self.client.recv(1024).decode()
+            print(result)
+        else:
+            print('[%s] Error!' % status_code)
+
+
+
+    # def __del__(self):
+    #     self.client.close()
+
 
 if __name__ == '__main__':
-    ftp_client = Myclient(('127.0.0.1', 8080))
+    ftp_client = MyClient(('localhost', 8080))
     ftp_client.start()
 
 
