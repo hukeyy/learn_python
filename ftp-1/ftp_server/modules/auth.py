@@ -30,7 +30,7 @@ class Auth:
                     os.makedirs(user_home_path)
                 user_db_file = os.path.join(settings.DATABASE_DIR, self.username) + '.db'
                 user_dict = {'username': self.username, 'password': self.password, 'home_path': user_home_path,
-                             'limit_size': 1024000}
+                             'limit_size': settings.LIMIT_FILE}
                 user_info = pickle.dumps(user_dict)
                 Auth.file_oper(user_db_file, 'ab', user_info)
                 Logger.info('%s 注册成功.' % self.username)

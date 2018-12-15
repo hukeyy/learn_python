@@ -14,8 +14,8 @@ USER_NAME_FILE = os.path.join(BASE_DIR, 'conf', 'user.txt')
 IP_PORT = ('localhost', 8080)
 
 LOG_PATH = os.path.join(BASE_DIR, 'logs')
-LOG_SIZE = 1024000
+LOG_SIZE = 102400
 LOG_NUM = 5
 
-
+LIMIT_FILE = 1024000000
 
