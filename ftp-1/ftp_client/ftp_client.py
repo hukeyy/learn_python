@@ -58,7 +58,6 @@ class MyClient:
     def cd(self, command):
         self.__universal_method_none(command)
 
-
     def __universal_method_none(self, command):
         self.client.sendall(command.encode())
         status_code = self.client.recv(1024).decode()
@@ -77,7 +76,6 @@ class MyClient:
             print(result)
         else:
             print('[%s] Error!' % status_code)
-
 
     def put(self, command):
         if len(command) > 1:
@@ -137,18 +135,6 @@ class MyClient:
 
         else:
             print('\033[31;1m[%s] Error!\033[0m' % status_code)
-
-
-
-
-
-
-
-
-
-
-
-
 
     def __progress(self, trans_size, file_size, mode):
         bar_length = 100
