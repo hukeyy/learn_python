@@ -8,18 +8,17 @@ from conf import settings
 
 class Logger:
     logger = logging.getLogger()
-    
     formatter = logging.Formatter('[%(asctime)s][%(levelname)s] %(message)s', '%Y-%m-%d %H:%M:%S')
     log_file = os.path.join(settings.LOG_PATH, sys.argv[0].split('/')[-1].split('.')[0]) + '.log'
-    fh = logging.handlers.RotatingFileHandler(log_file, maxBytes=settings.LOG_SIZE, backupCount=settings.LOG_NUM,
-                                              encoding='utf-8')
+    fh = logging.handlers.RotatingFileHandler(filename=log_file, maxBytes=settings.LOG_SIZE,
+                                              backupCount=settings.LOG_NUM, encoding='utf-8')
     ch = logging.StreamHandler()
-    
-    logger.addHandler(fh)
-    logger.addHandler(ch)
     
     fh.setFormatter(formatter)
     ch.setFormatter(formatter)
+    
+    logger.addHandler(fh)
+    logger.addHandler(ch)
     
     logger.setLevel(level=logging.INFO)
     
@@ -35,30 +34,4 @@ class Logger:
     def error(cls, msg):
         cls.logger.error(msg)
         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
