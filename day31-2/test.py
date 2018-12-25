@@ -2,14 +2,16 @@
 # -*- coding: utf-8 -*-
 # Author: hkey
 
-class Test:
-    name = 'hkey'
-    def hello(self):
-        print(self.name)
+# class Test:
+#     name = 'hkey'
+#     def hello(self):
+#         print(self.name)
+#
+#
+# t = Test()
+# t.hello()
 
-
-t = Test()
-t.hello()
+import os
 
 
 
